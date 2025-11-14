@@ -33,6 +33,13 @@
 
 &copy; 2025 Databricks, Inc. All rights reserved. The source in this project is provided subject to the Databricks License [https://databricks.com/db-license-source]. All included or referenced third party libraries are subject to the licenses set forth below.
 
-| Package | License | Copyright |
-|---------|---------|-----------|
-| | | |
+| Package | License | Copyright | Package Link | License Link |
+|---------|---------|-----------|--------------|--------------|
+| **biopython** | Biopython License Agreement (dual licensed with BSD 3-Clause) | Copyright (c) 1999-2024, The Biopython Contributors | https://github.com/biopython/biopython | https://github.com/biopython/biopython/blob/master/LICENSE.rst |
+| **torch** | BSD 3-Clause License (Modified BSD) | Copyright (c) 2016-present, Facebook, Inc. and contributors | https://github.com/pytorch/pytorch | https://github.com/pytorch/pytorch/blob/main/LICENSE |
+| **transformers** | Apache License 2.0 | Copyright 2018-present, The Hugging Face team | https://github.com/huggingface/transformers | https://github.com/huggingface/transformers/blob/main/LICENSE |
+| **Rostlab/prot_bert_bfd_membrane** | Academic Free License v3.0 (Model Weights) | Copyright 2020, Elnaggar et al. (Rostlab, TUM) | https://huggingface.co/Rostlab/prot_bert_bfd_membrane | https://opensource.org/license/afl-3-0-php |
+| **UniProt** (uniprot_sprot.fasta.gz) | Creative Commons Attribution 4.0 (CC BY 4.0) | Copyright 2002-present, The UniProt Consortium | https://www.uniprot.org/help/downloads | https://www.uniprot.org/help/license |
+| **pandas** | BSD 3-Clause License | Copyright (c) 2008-2011, AQR Capital Management, LLC, Lambda Foundry, Inc. and PyData Development Team; Copyright (c) 2011-present, Open source contributors | https://github.com/pandas-dev/pandas | https://github.com/pandas-dev/pandas/blob/main/LICENSE |
+| **pyspark** | Apache License 2.0 | Copyright 2014-present, The Apache Software Foundation | https://github.com/apache/spark | https://github.com/apache/spark/blob/master/LICENSE |
+| **databricks-sdk** | Apache License 2.0 | Copyright 2023-present, Databricks, Inc. | https://github.com/databricks/databricks-sdk-py | https://github.com/databricks/databricks-sdk-py/blob/main/LICENSE |
