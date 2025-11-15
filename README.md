@@ -23,7 +23,7 @@ The following diagram illustrates the flow of processes involved and the [Databr
 The [processed data](url-catalog?) and [served external foundational model endpoint](url-?) will be used to create the associated [AI/BI Dashboard](url?) -- please see for documentation/etc.: 
 > _**`to provide an example of how GenAI can be leveraged to discover more about protein properties and whether there are candidate proteins that are under-researched in areas that show promise for potential drug discovery.`**_
 
-With the [Genie Space enabled](url) during dashboard publication, users can _"Ask Genie"_ about the datasets and [additional example questions](./dashboards/GenieSpace_AdditionalExampleQs_GeneratedQueries) are provided as guidance. 
+When a [AIBI dashboard is Genie Space enabled](https://docs.databricks.com/aws/en/dashboards/genie-spaces) during publication, users can _"Ask Genie"_ about the datasets and [additional example questions](./dashboards/GenieSpace_AdditionalExampleQs_GeneratedQueries) are provided as guidance. 
 
 <!-- Additional information on [resources used](https://e2-demo-west.cloud.databricks.com/editor/files/1625373258642799?o=2556758628403379) are included for reference. -->
    
