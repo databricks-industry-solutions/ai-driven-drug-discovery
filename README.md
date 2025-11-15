@@ -18,7 +18,7 @@ The following diagram illustrates the flow of processes involved and the [Databr
 
 ![architecture sketch](./assets/imgs/AI-Drug-Discovery-Page2.png) 
 
-The [processed data written to Unity Catalog](https://docs.databricks.com/aws/en/data-governance/unity-catalog) and [served external foundational model endpoint](https://docs.databricks.com/en/generative-ai/external-models.html) will be used to create the associated [AI/BI Dashboard](https://docs.databricks.com/aws/en/dashboards/); e.g. [saved as pdf for sharing](./assets/imgs/`AI-Driven Drug Discovery [Dashboard].jpg`). 
+The [processed data written to Unity Catalog](https://docs.databricks.com/aws/en/data-governance/unity-catalog) and [served external foundational model endpoint](https://docs.databricks.com/en/generative-ai/external-models.html) will be used to create the associated [AI/BI Dashboard](https://docs.databricks.com/aws/en/dashboards/); e.g. [saved as pdf for sharing](/assets/imgs/`AI-Driven Drug Discovery [Dashboard].jpg`). 
 
 <!-- > _**`to provide an example of how GenAI can be leveraged to discover more about protein properties and whether there are candidate proteins that are under-researched in areas that show promise for potential drug discovery.`**_ -->
 
