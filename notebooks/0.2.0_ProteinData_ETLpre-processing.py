@@ -22,8 +22,19 @@
 # COMMAND ----------
 
 # MAGIC %md        
+# MAGIC #### Create an ETL pipeline via `Jobs & Pipelines` on the workspace LHS Tab:
+# MAGIC
+# MAGIC ![](../assets/imgs/Create_ETLpipeline.png)
+# MAGIC
+# MAGIC Use this notebook as the `source` of the ETL pipeline
+# MAGIC
+# MAGIC <br> 
+# MAGIC
+# MAGIC #### When defined and run, the resulting pipeline would reflect the following with 3 notebook tasks: 
 # MAGIC
 # MAGIC  <img src="../assets/imgs/ProteinDataProcessing_DLT.png" alt="Protein Data Processing DLT" />
+# MAGIC
+# MAGIC The `protein_preprocessing.yaml` is provided for reference
 
 # COMMAND ----------
 
@@ -48,7 +59,7 @@
 
 # DBTITLE 1,Define the DLT pipeline
 # MAGIC %md
-# MAGIC ## Define Tasks for our DLT pipeline
+# MAGIC ## Define Tasks for our ETL pipeline
 # MAGIC
 # MAGIC <!-- [Protein Data Processing](https://e2-demo-west.cloud.databricks.com/pipelines/c6a3e57b-1c44-476f-9e56-c8e05d9975f5/updates/2adf25f7-deb6-40fa-8f87-68efd0ca05a0?o=2556758628403379%3Fparent%3Dfolders%2F1625373258638091)  -->
 
@@ -65,7 +76,7 @@ import io
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ### [1] Create `bronze_protein` DLT 
+# MAGIC ### [1] Create `bronze_protein`  
 # MAGIC Load 500,000 protein sequences from 1 text file into Bronze Table
 
 # COMMAND ----------
@@ -115,7 +126,7 @@ def bronze_protein():
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ### [2] Create `silver_protein` DLT 
+# MAGIC ### [2] Create `silver_protein`  
 # MAGIC Parse through the text and format data into columns
 
 # COMMAND ----------
@@ -154,8 +165,8 @@ def silver_protein():
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ### [3] Create `enriched_protein` DLT
-# MAGIC  We can also demonstrate how fast and easy it is to use third party libraries e.g. ```Bio.SeqUtils' molecular_weight``` within a [`Pandas` User-Defined Function](https://docs.databricks.com/en/udf/pandas.html) inside a DLT pipeline task to calculate ***molecular weights*** of each molecule in a vectorized process.    
+# MAGIC ### [3] Create `enriched_protein` 
+# MAGIC  We can also demonstrate how fast and easy it is to use third party libraries e.g. ```Bio.SeqUtils' molecular_weight``` within a [`Pandas` User-Defined Function](https://docs.databricks.com/en/udf/pandas.html) inside an ETL pipeline task to calculate ***molecular weights*** of each molecule in a vectorized process.    
 # MAGIC       
 # MAGIC  Here, we are calculating *molecular weights* for 500,000 molecules and this takes about 30 seconds using a serverless DLT
 
@@ -207,8 +218,9 @@ def enriched_protein():
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ### [4] Review our defined DLT pipeline & `enriched_protein` sparkDF
-# MAGIC - Our defined DLT pipeline: [Protein Data Processing](https://e2-demo-field-eng.cloud.databricks.com/pipelines/f7cfd697-0adf-4719-85d0-26779034145b/updates/14a457fe-215b-4f6b-99d1-c5d81ce3345d?o=1444828305810485)    
+# MAGIC ### [4] Review our defined ETL pipeline & `enriched_protein` sparkDF
 # MAGIC
-# MAGIC - Use ``` (Ctrl + `)``` to view Terminal, DLT, Logs within notebook  
+# MAGIC - Defined ETL pipeline: refer to associated pipeline job    
+# MAGIC
+# MAGIC - Use ``` (Ctrl + `)``` to view Terminal, ETL, Logs within notebook  
 # MAGIC - Turn on ETL Pipeline editor 

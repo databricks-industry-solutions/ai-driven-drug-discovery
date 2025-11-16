@@ -2,6 +2,8 @@
 # MAGIC %md
 # MAGIC ## Create a [Mosaic AI Model Serving](https://learn.microsoft.com/en-us/azure/databricks/machine-learning/model-serving/) endpoint to serve an [`External Model`](https://docs.databricks.com/en/generative-ai/external-models/index.html)  
 # MAGIC
+# MAGIC [`At the time of this Solution's development, GPT-4o just surfaced. Today you have many other Foundational Models to consider. However, we use Azure GPT-4o here to illustrated how to create an external model serving endpoint.`]
+# MAGIC
 # MAGIC In order to leverage `GPT-4o's Medical and Scientific knowledge capabilities` (ref to `Health` and `Scientific Capabilities` sections under `Social Impacts` in [`gpt-4o-system-card`](https://openai.com/index/gpt-4o-system-card/)), we will serve the external `Azure Openai GPT-4o` model endpoint to use with our [AIBI Genie Space](https://docs.databricks.com/en/genie/index.html) 
 # MAGIC
 # MAGIC (_Omit steps `1-3` if your workspace already has an external endpoint serving `gpt-4o` with which you can call and make inference_)
