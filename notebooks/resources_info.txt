@@ -1,0 +1,47 @@
+## AI/BI Dashboard:
+https://e2-demo-west.cloud.databricks.com/dashboardsv3/01efc7181c8a1509ae71b5e4af24b29c/published?o=2556758628403379
+
+
+## UC: 
+demos_genie.hls_ai_drug_discovery
+https://e2-demo-west.cloud.databricks.com/explore/data/demos_genie/hls_ai_drug_discovery?o=2556758628403379
+
+
+## DLT Pipeline JSON
+{
+  "id": "f7cfd697-0adf-4719-85d0-26779034145b",
+  "pipeline_type": "WORKSPACE",
+  "name": "dlt_protein_preprocessing",
+  "libraries": [
+    {
+      "glob": {
+        "include": "/Workspace/Users/<user_email>/<foler_path>/0.1.0_DLT_ProteinData_processing" 
+      }
+    }
+  ],
+  "schema": "ai_driven_drug_discovery",
+  "continuous": false,
+  "development": true,
+  "photon": true,
+  "channel": "CURRENT",
+  "catalog": "mmt_demos2",
+  "serverless": true,
+  "root_path": "/Workspace/Users/<user_email>/<foler_path>/dlt_protein_preprocessing"
+}
+
+
+## compute JSON 
+"spec": {
+        "cluster_name": "<cluster_name>",
+        "spark_version": "15.4.x-scala2.12",
+        "aws_attributes": {
+            "zone_id": "auto"
+        },
+        "node_type_id": "g4dn.4xlarge",
+        "custom_tags": {
+            "removeAfter": "2025-12-31"
+        }
+    }
+
+## LUCID CHART diagrams
+https://lucid.app/lucidchart/73e9b1d4-22b8-4068-8210-fc2634283f47/edit?viewport_loc=-743%2C-325%2C2736%2C1592%2CDkQHgbEYUJNF&invitationId=inv_f040b01f-6508-4cab-89db-25b218bb146c
