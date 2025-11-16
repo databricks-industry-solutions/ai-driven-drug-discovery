@@ -26,7 +26,7 @@
 # MAGIC
 # MAGIC ![](../assets/imgs/Create_ETLpipeline.png)
 # MAGIC
-# MAGIC Use this notebook as the `source` of the ETL pipeline
+# MAGIC **Use this notebook as the `source` of the ETL pipeline**
 # MAGIC
 # MAGIC <br> 
 # MAGIC
