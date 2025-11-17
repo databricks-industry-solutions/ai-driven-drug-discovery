@@ -28,3 +28,4 @@ build/
 
 # Dev folders & files
 ._devs
+._omit
