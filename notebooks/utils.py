@@ -1,19 +1,17 @@
 # Databricks notebook source
 # DBTITLE 1,Please specify UC config before starting
 # utils.py | .ipynb
-# ============================================================
-# REQUIRED: UPDATE THESE DEFAULT VALUES FOR YOUR ENVIRONMENT
-# ============================================================
-# These values are used when widgets are not enabled, or as 
-# placeholder fallback defaults when widget values are empty.
-# 
+# ===============================================================
+# REQUIRED: UPDATE THESE PLACEHOLDER VALUES FOR YOUR ENVIRONMENT
+# ===============================================================
+# These values are used as placeholder / defaults 
 
 ## REPLACE THE VALUES BELOW WITH YOUR OWN BEFORE running the notebooks:
 
 CATALOG_NAME = "<your_catalog_name>"      # TODO: Replace with <your_catalog_name>
-SCHEMA_NAME = "ai_driven_drug_discovery"  # TODO: Replace with <your_schema_name>
-VOLUME_NAME = "protein_seq"               # TODO: Replace with <your_volume_name> for file storage
-ENDPOINT_NAME = "az_openai_gpt4o"         # TODO: Replace with <your_external_endpoint_name> e.g. AI Gateway endpoint name
+SCHEMA_NAME = "ai_driven_drug_discovery"  # TODO: Use Default OR Replace with <your_schema_name>
+VOLUME_NAME = "protein_seq"               # TODO: Use Default OR Replace with <your_volume_name> for file storage
+ENDPOINT_NAME = "az_openai_gpt4o"         # TODO: Use Default OR Replace with <your_external_endpoint_name> e.g. AI Gateway endpoint name
 
 from pyspark.sql import SparkSession
 
