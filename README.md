@@ -59,50 +59,9 @@ Clone this repository to your Databricks Workspace.
 You will find the set of notebooks referenced above within the `/notebooks` folder, the dashboards json files within `/dashboards`.    
 Dashboard Unity Catalog-tables will need to be re-referenced after they are being generated via the notebooks. 
 
-Please refer to README.md within `./notebooks` section for more details about each notebook and how to run them and refer to the README.md within `./dashboards` for dashboard configurations.
+Please refer to `README.md` within [`./notebooks`](notebook/README.md) section for more details about each notebook and how to run them and refer to the `README.md` within [`./dashboards`](dashboards/README.md) for guidance on dashboard configurations.
 
 <br>
-
----     
-The [set of notebooks](notebooks) found within this repository involves data preparation and foundational model endpoint setup and usage.  
-
-Most of the notebooks will rely on the [**`utils.py`**](notebooks/utils.py) to configure the Unity Catalog paths.    
-**Users are required to update the Unity Catalog `<catalog_name>`** :
-
-```
-# ===============================================================
-# REQUIRED: UPDATE THESE PLACEHOLDER VALUES FOR YOUR ENVIRONMENT
-# ===============================================================
-# These values are used as placeholder / defaults 
-
-## REPLACE THE VALUES BELOW WITH YOUR OWN BEFORE running the notebooks:
-
-CATALOG_NAME = "<your_catalog_name>"      # TODO: Replace with <your_catalog_name>
-SCHEMA_NAME = "ai_driven_drug_discovery"  # TODO: Use Default OR Replace with <your_schema_name>
-VOLUME_NAME = "protein_seq"               # TODO: Use Default OR Replace with <your_volume_name> for file storage
-ENDPOINT_NAME = "az_openai_gpt4o"         # TODO: Use Default OR Replace with <your_external_endpoint_name> e.g. AI Gateway endpoint name
-    
-```    
-
-**The notebooks step through the workflow:**    
-
-1. Programatically [`Download_UNIPROT_fasta`](notebooks/1.0_Download_UNIPROT_fasta.ipynb) to Unity Catalog Volumes 
-
-2. Run the [`ProteinData_ETL`](notebooks/2.0_ProteinData_ETL.ipynb) to clean and enrich the raw fasta data e.g. with molecular weights info.
-    - For this ETL pipeline notebook, users are required to update `<catalog_name>` within before using it as a source for setting up, validating, and running the notebook as an ETL pipeline. 
-
-3. Apply [`TransformerCNN_Protein_Classification`](notebooks/3.0_TransformerCNN_Protein_Classification.ipynb) to assess if protein sequence is likely of the type `water-soluble` or `cell-membrane transport` function specific. 
-
-4. Leverage GenAI and Databricks's Foundational LLMs (FMAPI) by [`Register&Query_scientific2simple_UDF`](notebooks/4.0_Register&Query_scientific2simple_UDF.ipynb) [03 help democratize scientific knowledge](path?), 
-as well as 
-
-5. [`Create&Query_ExternalEndpoint_gpt4o`](notebooks/5.0_Create&Query_ExternalEndpoint_gpt4o.ipynb) [04 downstream discovery efforts](path?).    
-
-<br> 
-
-Once these notebooks are run, we can configure the AIBI Dashboard with Genie using the associate template within `./dashboards` folder.
-
-<br>    
 
 ---     
 
