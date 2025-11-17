@@ -24,7 +24,7 @@ WITH protein_organism AS (
     `OrganismName`,
     `score`
   FROM
-    `demos_genie`.`hls_ai_drug_discovery`.`proteinclassification_tiny`
+    `<catalog_name>`.`<schema_name>`.`proteinclassification_tiny`
   WHERE
     `ProteinName` IS NOT NULL
     AND `OrganismName` IS NOT NULL
@@ -50,7 +50,7 @@ SELECT
 FROM
   protein_organism p
   JOIN protein_count pc ON p.`ProteinName` = pc.`ProteinName`
-  JOIN `demos_genie`.`hls_ai_drug_discovery`.`tinysample_organism_info_scientificnsimple` o ON p.`OrganismName` = o.`OrganismName`
+  JOIN `<catalog_name>`.`<schema_name>`.`tinysample_organism_info_scientificnsimple` o ON p.`OrganismName` = o.`OrganismName`
 ORDER BY
   p.`ProteinName`,
   p.`OrganismName`
@@ -67,7 +67,7 @@ WITH protein_organism AS (
     `OrganismName`,
     `score`
   FROM
-    `demos_genie`.`hls_ai_drug_discovery`.`proteinclassification_tiny`
+    `<catalog_name>`.`<schema_name>`.`proteinclassification_tiny`
   WHERE
     `ProteinName` IS NOT NULL
     AND `OrganismName` IS NOT NULL
@@ -93,7 +93,7 @@ SELECT
 FROM
   protein_organism p
   JOIN protein_count pc ON p.`ProteinName` = pc.`ProteinName`
-  JOIN `demos_genie`.`hls_ai_drug_discovery`.`tinysample_organism_protein_research_info` r ON p.`OrganismName` = r.`OrganismName`
+  JOIN `<catalog_name>`.`<schema_name>`.`tinysample_organism_protein_research_info` r ON p.`OrganismName` = r.`OrganismName`
   AND p.`ProteinName` = r.`ProteinName`
 ORDER BY
   p.`ProteinName`,
@@ -113,8 +113,8 @@ WITH q AS (
     p.label AS ProteinType,
     p.score AS ProteinClassificationScore
   FROM
-    `demos_genie`.`hls_ai_drug_discovery`.`proteinclassification_tiny` p
-    JOIN `demos_genie`.`hls_ai_drug_discovery`.`tinysample_organism_info_scientificnsimple` o ON p.OrganismName = o.OrganismName
+    `<catalog_name>`.`<schema_name>`.`proteinclassification_tiny` p
+    JOIN `<catalog_name>`.`<schema_name>`.`tinysample_organism_info_scientificnsimple` o ON p.OrganismName = o.OrganismName
   WHERE
     p.ProteinName IS NOT NULL
     AND p.label IS NOT NULL
@@ -151,8 +151,8 @@ WITH q AS (
     p.label AS ProteinType,
     p.score AS ProteinClassificationScore
   FROM
-    `demos_genie`.`hls_ai_drug_discovery`.`proteinclassification_tiny` p
-    JOIN `demos_genie`.`hls_ai_drug_discovery`.`tinysample_organism_info_scientificnsimple` o ON p.OrganismName = o.OrganismName
+    `<catalog_name>`.`<schema_name>`.`proteinclassification_tiny` p
+    JOIN `<catalog_name>`.`<schema_name>`.`tinysample_organism_info_scientificnsimple` o ON p.OrganismName = o.OrganismName
   WHERE
     p.ProteinName IS NOT NULL
     AND p.label IS NOT NULL
@@ -189,8 +189,8 @@ WITH q AS (
     p.label AS ProteinType,
     p.score AS ProteinClassificationScore
   FROM
-    `demos_genie`.`hls_ai_drug_discovery`.`proteinclassification_tiny` p
-    JOIN `demos_genie`.`hls_ai_drug_discovery`.`tinysample_organism_info_scientificnsimple` o ON p.OrganismName = o.OrganismName
+    `<catalog_name>`.`<schema_name>`.`proteinclassification_tiny` p
+    JOIN `<catalog_name>`.`<schema_name>`.`tinysample_organism_info_scientificnsimple` o ON p.OrganismName = o.OrganismName
   WHERE
     p.ProteinName IS NOT NULL
     AND p.label IS NOT NULL
@@ -228,10 +228,10 @@ WITH high_confidence_proteins AS (
     r.recent_research,
     r.under_researched_areas
   FROM
-    `demos_genie`.`hls_ai_drug_discovery`.`proteinclassification_tiny` p
-    JOIN `demos_genie`.`hls_ai_drug_discovery`.`tinysample_organism_protein_research_info` r ON p.ProteinName = r.ProteinName
+    `<catalog_name>`.`<schema_name>`.`proteinclassification_tiny` p
+    JOIN `<catalog_name>`.`<schema_name>`.`tinysample_organism_protein_research_info` r ON p.ProteinName = r.ProteinName
     AND p.OrganismName = r.OrganismName
-    JOIN `demos_genie`.`hls_ai_drug_discovery`.`tinysample_organism_info_scientificnsimple` o ON p.OrganismName = o.OrganismName
+    JOIN `<catalog_name>`.`<schema_name>`.`tinysample_organism_info_scientificnsimple` o ON p.OrganismName = o.OrganismName
   WHERE
     p.score > 0.85
 )
