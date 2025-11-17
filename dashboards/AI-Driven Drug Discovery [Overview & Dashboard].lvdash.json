@@ -379,7 +379,7 @@
                 "- `tinysample_organism_info_scientificNsimple`: contains scientific (`OrganismName`), layman (`Organism_SimpleTerm`), and corresponding `Organism_Definition` information about the different organisms found in the `proteinclassification_tiny` table. It is derived with [ai\\_query](https://e2-demo-west.cloud.databricks.com/editor/notebooks/1625373258635024?o=2556758628403379#command/1625373258638832) using the pay-per-token [Foundational Model API](https://docs.databricks.com/en/machine-learning/foundation-models/index.html) `databricks-meta-llama-3-3-70b-instruct` [model endpoint](https://docs.databricks.com/en/machine-learning/model-serving/index.html) and making [batch interferencing](https://e2-demo-west.cloud.databricks.com/editor/notebooks/1625373258635024?o=2556758628403379#command/1625373258638913) with the `ai_query()` registered as a [User Defined Function in Unity Catalog](https://docs.databricks.com/en/udf/unity-catalog.html).     <br>---\n",
                 "- `tinysample_organism_protein_research_info`: contains research information about organisms and their associated proteins, including `recent research` and `under-researched areas` of these proteins that show potential promise for drug discovery. These research insights are derived with the help of [using Azure OpenAI GPT-4o served as an External Model Endpoint](https://docs.databricks.com/aws/en/machine-learning/model-serving/create-foundation-model-endpoints#ext-model-endpoint) and [queried as an External Model using `ai-query()`](https://docs.databricks.com/en/large-language-models/ai-query-external-model.html). For more efficient exploration, the queries for our `tinysample` of proteins are [preprocessed in bulk](https://e2-demo-west.cloud.databricks.com/editor/notebooks/1625373258636712?o=2556758628403379%3Fparent%3Dfolders%2F1625373258638091#command/1625373258641291).      \n",
                 "\n",
-                "These tables are found within the demo workspace [Unity Catalog](https://docs.databricks.com/en/catalogs/index.html) and [Schema](https://docs.databricks.com/en/schemas/index.html#what-is-a-schema): [`demos_genie.hls_ai_drug_discovery`](https://e2-demo-west.cloud.databricks.com/explore/data/demos_genie/hls_ai_drug_discovery?o=2556758628403379) and are connected primarily through the `OrganismName`.        \n",
+                "These tables are found within the demo workspace [Unity Catalog](https://docs.databricks.com/en/catalogs/index.html) and [Schema](https://docs.databricks.com/en/schemas/index.html#what-is-a-schema): [<catalog\\_name>.ai\\_driven\\_drug\\_discovery](https://e2-demo-west.cloud.databricks.com/explore/data/demos_genie/hls_ai_drug_discovery?o=2556758628403379) and are connected primarily through the `OrganismName`.        \n",
                 "\n",
                 "--- \n",
                 "<p>&nbsp;</p>\n",
@@ -405,7 +405,7 @@
             "x": 0,
             "y": 0,
             "width": 6,
-            "height": 20
+            "height": 34
           }
         }
       ],
@@ -1826,9 +1826,9 @@
           },
           "position": {
             "x": 0,
-            "y": 84,
+            "y": 87,
             "width": 6,
-            "height": 10
+            "height": 8
           }
         },
         {
@@ -1870,7 +1870,7 @@
           },
           "position": {
             "x": 4,
-            "y": 94,
+            "y": 84,
             "width": 1,
             "height": 3
           }
@@ -1913,7 +1913,7 @@
           },
           "position": {
             "x": 5,
-            "y": 94,
+            "y": 84,
             "width": 1,
             "height": 3
           }
@@ -1932,7 +1932,7 @@
           },
           "position": {
             "x": 0,
-            "y": 94,
+            "y": 84,
             "width": 4,
             "height": 3
           }
@@ -1951,7 +1951,7 @@
           },
           "position": {
             "x": 0,
-            "y": 97,
+            "y": 95,
             "width": 6,
             "height": 2
           }
@@ -1963,7 +1963,7 @@
               {
                 "name": "main_query",
                 "query": {
-                  "datasetName": "d26479ea",
+                  "datasetName": "82e85554",
                   "fields": [
                     {
                       "name": "OrganismName",
@@ -2031,8 +2031,7 @@
                     "allowHTML": false,
                     "highlightLinks": false,
                     "useMonospaceFont": false,
-                    "preserveWhitespace": false,
-                    "displayName": "OrganismName"
+                    "preserveWhitespace": false
                   },
                   {
                     "fieldName": "Organism_SimpleTerm",
@@ -2058,8 +2057,7 @@
                     "allowHTML": false,
                     "highlightLinks": false,
                     "useMonospaceFont": false,
-                    "preserveWhitespace": false,
-                    "displayName": "Organism_SimpleTerm"
+                    "preserveWhitespace": false
                   },
                   {
                     "fieldName": "ProteinName",
@@ -2085,8 +2083,7 @@
                     "allowHTML": false,
                     "highlightLinks": false,
                     "useMonospaceFont": false,
-                    "preserveWhitespace": false,
-                    "displayName": "ProteinName"
+                    "preserveWhitespace": false
                   },
                   {
                     "fieldName": "information",
@@ -2112,8 +2109,7 @@
                     "allowHTML": false,
                     "highlightLinks": false,
                     "useMonospaceFont": false,
-                    "preserveWhitespace": false,
-                    "displayName": "information"
+                    "preserveWhitespace": false
                   },
                   {
                     "fieldName": "recent_research",
@@ -2139,8 +2135,7 @@
                     "allowHTML": false,
                     "highlightLinks": false,
                     "useMonospaceFont": false,
-                    "preserveWhitespace": false,
-                    "displayName": "recent_research"
+                    "preserveWhitespace": false
                   },
                   {
                     "fieldName": "under_researched_areas",
@@ -2166,8 +2161,7 @@
                     "allowHTML": false,
                     "highlightLinks": false,
                     "useMonospaceFont": false,
-                    "preserveWhitespace": false,
-                    "displayName": "under_researched_areas"
+                    "preserveWhitespace": false
                   },
                   {
                     "fieldName": "ProteinType",
@@ -2193,8 +2187,7 @@
                     "allowHTML": false,
                     "highlightLinks": false,
                     "useMonospaceFont": false,
-                    "preserveWhitespace": false,
-                    "displayName": "ProteinType"
+                    "preserveWhitespace": false
                   },
                   {
                     "fieldName": "ProteinClassificationScore",
@@ -2216,13 +2209,12 @@
                     "visible": true,
                     "order": 100008,
                     "title": "ProteinClassificationScore",
-                    "allowSearch": true,
+                    "allowSearch": false,
                     "alignContent": "right",
                     "allowHTML": false,
                     "highlightLinks": false,
                     "useMonospaceFont": false,
-                    "preserveWhitespace": false,
-                    "displayName": "ProteinClassificationScore"
+                    "preserveWhitespace": false
                   }
                 ]
               },
@@ -2241,8 +2233,8 @@
                   "linkTitleTemplate": "{{ @ }}",
                   "linkOpenInNewTab": true,
                   "name": "researchDict",
-                  "type": "string",
-                  "displayAs": "string",
+                  "type": "complex",
+                  "displayAs": "json",
                   "order": 100003,
                   "title": "researchDict",
                   "allowSearch": false,
@@ -2268,7 +2260,7 @@
           },
           "position": {
             "x": 0,
-            "y": 102,
+            "y": 100,
             "width": 6,
             "height": 10
           }
@@ -2278,7 +2270,7 @@
             "name": "a212417f",
             "queries": [
               {
-                "name": "dashboards/01efc7181c8a1509ae71b5e4af24b29c/datasets/01efc8d15fc217fa8100cff05dc5458f_Organism_SimpleTerm",
+                "name": "dashboards/01f0c2bc0c961b4c9646a3cbf2b7a11c/datasets/01f0c352bc3d1e0abe26d7e34d9b94b6_Organism_SimpleTerm",
                 "query": {
                   "datasetName": "82e85554",
                   "fields": [
@@ -2302,8 +2294,7 @@
                 "fields": [
                   {
                     "fieldName": "Organism_SimpleTerm",
-                    "displayName": "Organism_SimpleTerm",
-                    "queryName": "dashboards/01efc7181c8a1509ae71b5e4af24b29c/datasets/01efc8d15fc217fa8100cff05dc5458f_Organism_SimpleTerm"
+                    "queryName": "dashboards/01f0c2bc0c961b4c9646a3cbf2b7a11c/datasets/01f0c352bc3d1e0abe26d7e34d9b94b6_Organism_SimpleTerm"
                   }
                 ]
               },
@@ -2315,8 +2306,8 @@
           },
           "position": {
             "x": 0,
-            "y": 99,
-            "width": 2,
+            "y": 97,
+            "width": 3,
             "height": 3
           }
         },
@@ -2325,7 +2316,7 @@
             "name": "a2ee57be",
             "queries": [
               {
-                "name": "dashboards/01efc7181c8a1509ae71b5e4af24b29c/datasets/01efc8d15fc217fa8100cff05dc5458f_ProteinClassificationScore",
+                "name": "dashboards/01f0c2bc0c961b4c9646a3cbf2b7a11c/datasets/01f0c352bc3d1e0abe26d7e34d9b94b6_ProteinClassificationScore",
                 "query": {
                   "datasetName": "82e85554",
                   "fields": [
@@ -2349,8 +2340,7 @@
                 "fields": [
                   {
                     "fieldName": "ProteinClassificationScore",
-                    "displayName": "ProteinClassificationScore",
-                    "queryName": "dashboards/01efc7181c8a1509ae71b5e4af24b29c/datasets/01efc8d15fc217fa8100cff05dc5458f_ProteinClassificationScore"
+                    "queryName": "dashboards/01f0c2bc0c961b4c9646a3cbf2b7a11c/datasets/01f0c352bc3d1e0abe26d7e34d9b94b6_ProteinClassificationScore"
                   }
                 ]
               },
@@ -2363,8 +2353,8 @@
             }
           },
           "position": {
-            "x": 2,
-            "y": 99,
+            "x": 3,
+            "y": 97,
             "width": 2,
             "height": 3
           }
@@ -2374,7 +2364,7 @@
             "name": "0b7e69f1",
             "queries": [
               {
-                "name": "dashboards/01efc7181c8a1509ae71b5e4af24b29c/datasets/01efc8d15fc217fa8100cff05dc5458f_ProteinType",
+                "name": "dashboards/01f0c2bc0c961b4c9646a3cbf2b7a11c/datasets/01f0c352bc3d1e0abe26d7e34d9b94b6_ProteinType",
                 "query": {
                   "datasetName": "82e85554",
                   "fields": [
@@ -2398,21 +2388,28 @@
                 "fields": [
                   {
                     "fieldName": "ProteinType",
-                    "displayName": "ProteinType",
-                    "queryName": "dashboards/01efc7181c8a1509ae71b5e4af24b29c/datasets/01efc8d15fc217fa8100cff05dc5458f_ProteinType"
+                    "queryName": "dashboards/01f0c2bc0c961b4c9646a3cbf2b7a11c/datasets/01f0c352bc3d1e0abe26d7e34d9b94b6_ProteinType"
                   }
                 ]
               },
               "frame": {
                 "showTitle": true,
                 "showDescription": true
+              },
+              "selection": {
+                "defaultSelection": {
+                  "operator": {
+                    "operator": "AND",
+                    "args": []
+                  }
+                }
               }
             }
           },
           "position": {
-            "x": 4,
-            "y": 99,
-            "width": 2,
+            "x": 5,
+            "y": 97,
+            "width": 1,
             "height": 3
           }
         },
@@ -2475,7 +2472,7 @@
           },
           "position": {
             "x": 0,
-            "y": 112,
+            "y": 110,
             "width": 6,
             "height": 1
           }

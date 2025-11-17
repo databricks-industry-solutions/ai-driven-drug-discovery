@@ -102,9 +102,7 @@
 
 # DBTITLE 1,Install torch & transformers
 # MAGIC %pip install -q torch==2.3.1 transformers==4.41.2
-# MAGIC
 # MAGIC dbutils.library.restartPython()
-# MAGIC
 
 # COMMAND ----------
 
@@ -152,8 +150,8 @@ pipeline("M E S N L S G L V P A A G L V P A L P P A V T L G L T A A Y T T L Y A 
 # MAGIC %md
 # MAGIC ####[4] Downsample for batch inferencing 
 # MAGIC
-# MAGIC For this demo, we work with a "_tiny_" sample of 500 proteins to do inference instead of the full 500,000 proteins. 
-# MAGIC We can scale our solution for a production workload.
+# MAGIC For this demo, we work with a "_tiny_" sample of ~500--3000  proteins (depending on sampling ratio) to do inference instead of the full 500,000 proteins. 
+# MAGIC We can subsequently scale our solution for a production workload.
 
 # COMMAND ----------
 
@@ -177,7 +175,8 @@ spark.sql(f"""
     CREATE OR REPLACE TABLE {catalog_name}.{schema_name}.tiny_sample_data AS
     SELECT *
     FROM {catalog_name}.{schema_name}.enriched_protein
-    TABLESAMPLE (0.1 PERCENT)
+    TABLESAMPLE (0.5 PERCENT) REPEATABLE (42) -- yields ~2880 records
+    -- TABLESAMPLE (0.1 PERCENT) REPEATABLE (42) -- yields ~500 records
 """)
 
 # COMMAND ----------
@@ -236,3 +235,12 @@ display(df.limit(100))
 
 # DBTITLE 1,Write out the output to UC catalog
 df.write.mode("overwrite").option("mergeSchema", "true").saveAsTable(f"{catalog_name}.{schema_name}.ProteinClassification_tiny")
+
+# COMMAND ----------
+
+# DBTITLE 1,count N records
+df.count()
+
+# COMMAND ----------
+
+

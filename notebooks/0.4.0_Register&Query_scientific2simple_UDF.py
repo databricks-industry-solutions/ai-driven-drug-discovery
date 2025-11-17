@@ -3,7 +3,7 @@
 # MAGIC ## [Create](https://docs.databricks.com/en/sql/language-manual/sql-ref-syntax-ddl-create-sql-function.html) and register `scientific2simple` as a [`UDF`](https://docs.databricks.com/en/udf/unity-catalog.html) to Unity Catalog 
 # MAGIC To democratize the usage or our [Classified Proteins]($./02_TransformerCNN_Protein_Classification) in our [AI/BI Genie](https://www.databricks.com/product/ai-bi/genie) [Space](https://docs.databricks.com/en/genie/index.html), we can leverage [Foundational Models API](https://docs.databricks.com/en/machine-learning/foundation-models/index.html#use-foundation-apis) to help simplify _protein scientific terms_ and provide _layman simple terms with definition_.
 # MAGIC
-# MAGIC To do so, we will use [`ai_query()`](https://docs.databricks.com/en/sql/language-manual/functions/ai_query.html) [to query the Foundation Model](https://docs.databricks.com/en/large-language-models/how-to-ai-query.html) `databricks-meta-llama-3-3-70b-instruct`  in a specific way to bulk convert the `OrganismName` scientific terms to layman simple terms and to provide [`UDF`](https://docs.databricks.com/en/udf/unity-catalog.html) [structured outputs](https://docs.databricks.com/en/machine-learning/model-serving/structured-outputs.html). 
+# MAGIC To do so, we will use [`ai_query()`](https://docs.databricks.com/en/sql/language-manual/functions/ai_query.html) [to query the Foundation Model](https://docs.databricks.com/en/large-language-models/how-to-ai-query.html) `databricks-meta-llama-3-3-70b-instruct` (or any other suitable LLMs available as FMAPI on Databricks e.g. `databricks-claude-sonnet-4-5`) in a specific way to bulk convert the `OrganismName` scientific terms to layman simple terms and to provide [`UDF`](https://docs.databricks.com/en/udf/unity-catalog.html) [structured outputs](https://docs.databricks.com/en/machine-learning/model-serving/structured-outputs.html). 
 # MAGIC
 # MAGIC To reuse the logic of converting scientific terms to simpler layman terms (e.g. as a tool in [function-calling](https://docs.databricks.com/en/machine-learning/model-serving/function-calling.html)), we can register the the `ai_query()` as a [`UDF function`](https://docs.databricks.com/en/udf/unity-catalog.html) and then use it in a query to create the desired table with simplified terms and their meanings.
 # MAGIC
@@ -78,7 +78,8 @@ display(sDF.groupby('OrganismName').agg((F.size(F.collect_set('ProteinName')).al
 # COMMAND ----------
 
 # DBTITLE 1,Write/Read tinysample_organism_info
-# sDF.select('OrganismName').distinct().write.mode("overwrite").option("mergeSchema", "true").saveAsTable(f"{catalog_name}.{schema_name}.tinysample_organism_info")
+## Uncomment to write out the table
+sDF.select('OrganismName').distinct().write.mode("overwrite").option("mergeSchema", "true").saveAsTable(f"{catalog_name}.{schema_name}.tinysample_organism_info")
 
 ## check/read tinysample_organism_info 
 sDF_orginfo = spark.table(f"{catalog_name}.{schema_name}.tinysample_organism_info")
@@ -108,30 +109,31 @@ display(sDF_orginfo)
 # COMMAND ----------
 
 # DBTITLE 1,TEST: Can LLM help simplify scientific terms?
-# MAGIC %sql
-# MAGIC -- Use the ai_query function directly in a query and perform the necessary scientific2simple term transformations in a single query
-# MAGIC
-# MAGIC -- CREATE OR REPLACE TABLE ${catalog_name}.${schema_name}.tinysample_organism_info_scientificNsimple USING DELTA AS
-# MAGIC SELECT
-# MAGIC   OrganismName,
-# MAGIC   SimpleTermDict,
-# MAGIC   get_json_object(SimpleTermDict, '$.simple_term') AS Organism_SimpleTerm,
-# MAGIC   get_json_object(SimpleTermDict, '$.meaning') AS Organism_Definition
-# MAGIC FROM (
-# MAGIC   SELECT
-# MAGIC     OrganismName,
-# MAGIC     ai_query(
-# MAGIC       'databricks-meta-llama-3-3-70b-instruct', 
-# MAGIC       -- please update to model and/or version that exists in your workspace e.g.
-# MAGIC       -- 'databricks-claude-sonnet-4-5',
-# MAGIC       CONCAT(
-# MAGIC         'As a knowledgeable and factual encyclopedia you respond succinctly. Provide a dictionary of responses in the format {"key": "response"} to the following keys a "simple layman term" and "meaning" for the given "scientific term": ', 
-# MAGIC         OrganismName, 
-# MAGIC         '. Output just the dictionary {"simple_term": "response", "meaning": "response"}.'
-# MAGIC       )
-# MAGIC     ) AS SimpleTermDict
-# MAGIC   FROM mmt_demos2.ai_driven_drug_discovery.tinysample_organism_info --full name required
-# MAGIC ) ORDER BY OrganismName
+# Use the ai_query function directly in a query and perform the necessary scientific2simple term transformations in a single query
+
+organism_info_sDF = spark.sql(
+    f"""
+    SELECT
+      OrganismName,
+      SimpleTermDict,
+      get_json_object(SimpleTermDict, '$.simple_term') AS Organism_SimpleTerm,
+      get_json_object(SimpleTermDict, '$.meaning') AS Organism_Definition
+    FROM (
+      SELECT
+        OrganismName,
+        ai_query(
+          'databricks-meta-llama-3-3-70b-instruct',
+          CONCAT(
+            'As a knowledgeable and factual encyclopedia you respond succinctly. Provide a dictionary of responses in the format {{"key": "response"}} to the following keys a "simple layman term" and "meaning" for the given "scientific term": ',
+            OrganismName,
+            '. Output just the dictionary {{"simple_term": "response", "meaning": "response"}}.'
+          )
+        ) AS SimpleTermDict
+      FROM {catalog_name}.{schema_name}.tinysample_organism_info
+    ) ORDER BY OrganismName
+    """
+)
+display(organism_info_sDF)
 
 # COMMAND ----------
 
@@ -172,28 +174,6 @@ RETURN ai_query(
 
 # Execute the query to create the function
 spark.sql(create_function_query)
-
-
-#-------------------------------------------------------------------------------------------------------------------------------
-
-### via SQL 
-# %sql
-
-# CREATE OR REPLACE FUNCTION ${catalog_name}.${schema_name}.scientific2simple_dict(OrganismName STRING)
-# RETURNS STRING
-# COMMENT 'Returns a dictionary of simple terms and definitions for the given scientific term as JSON output.'
-# LANGUAGE SQL
-# RETURN ai_query(
-#   'databricks-meta-llama-3-3-70b-instruct',
-#   CONCAT('As a knowledgeable and factual encyclopedia you respond succinctly. Provide a dictionary of responses in the format {"key": "response"} to the following keys a "simple layman term" and "meaning" for the given "scientific term": ', OrganismName, '. Output just the dictionary {"simple_term": "response", "meaning": "response"}.')
-# );
-
-### -- Test the registered function
-# SELECT
-#   OrganismName,
-#   ${catalog_name}.${schema_name}.scientific2simple_dict(OrganismName) AS SimpleTermDict
-# FROM ${catalog_name}.${schema_name}.tinysample_organism_info;
-
 
 # COMMAND ----------
 
@@ -238,3 +218,8 @@ orginfo_sDF.write.mode("overwrite").option("mergeSchema", "true").saveAsTable(f"
 orginfo_sDF = spark.table(f"{catalog_name}.{schema_name}.tinysample_organism_info_scientificNsimple")
 
 display(orginfo_sDF)
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC

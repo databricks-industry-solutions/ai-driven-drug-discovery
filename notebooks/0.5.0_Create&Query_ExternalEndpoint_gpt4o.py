@@ -197,8 +197,7 @@ uc_config = setup_uc_paths(spark=None, use_widgets=False); ## if you update the 
 catalog_name = uc_config["catalog_name"]
 schema_name = uc_config["schema_name"]
 volume_name = uc_config["volume_name"]
-# external_endpoint_name = uc_config["external_endpoint_name"]
-
+# endpoint_name = uc_config["external_endpoint_name"]
 
 # COMMAND ----------
 
@@ -336,13 +335,29 @@ else:
 
 # COMMAND ----------
 
+# MAGIC %run ./utils
+
+# COMMAND ----------
+
+remove_widgets() 
+uc_config = setup_uc_paths(spark=None, use_widgets=False); ## if you update the values in widgets -- it will automatically trigger an update of the UC paths
+
+# Extract catalog, schema, volume names
+catalog_name = uc_config["catalog_name"]
+schema_name = uc_config["schema_name"]
+volume_name = uc_config["volume_name"]
+external_endpoint_name = uc_config["external_endpoint_name"]
+
+# COMMAND ----------
+
 # DBTITLE 1,TEST external gpt4o endpoint
 from pyspark.sql import functions as F
 
 # Parameters
-# catalog_name = "mmt_demos2" #"<your_catalog_name>" 
+# catalog_name = "<catalog_name>" #"<your_catalog_name>" 
 # schema_name = "ai_driven_drug_discovery" #"<your_schema_name>"
-# endpoint_name = "az_openai_gpt4o" ## name of deployed external endpoint on your workspace
+# external_endpoint_name = "az_openai_gpt4o" ## name of deployed external endpoint on your workspace
+
 score_threshold = 0.85
 organism_filter = "%human%"
 
@@ -420,28 +435,6 @@ display(result_df)
 # MAGIC %md
 # MAGIC ### [5] Register the [`ai_query()`](https://docs.databricks.com/aws/en/sql/language-manual/functions/ai_query) as `SQL_function` to Unity Catalog 
 # MAGIC Similarly to previous example, We can register the `ai_query()` calling the external Foundation Model `az_openai_gpt4o` to help with getting protein related research infomation associated with Organism of interest. This makes it easier for calling the registered SQL_function later in either AI/BI Dashboard/Genie Space or even in the Playground. 
-
-# COMMAND ----------
-
-# DBTITLE 1,[x] Register as ai_query() as SQL function
-### via PySpark 
-# Define the SQL function
-
-create_function_query = f"""
-CREATE OR REPLACE FUNCTION {catalog_name}.{schema_name}.get_protein_research_info(ProteinName STRING)
-RETURNS STRING
-COMMENT 'Returns a dictionary of information, recent_research, and under_researched_areas as JSON output.'
-RETURN ai_query(
-          'az_openai_gpt4o',
-          CONCAT(
-            'You are well-versed in membrane proteins and drug discovery research. Please be brief. Provide a dictionary of responses in the format {{"key": "response"}} to the following keys "information", "recent_research" and highlight "under_researched_areas" that hold promise for drug discovery for the given "protein name": ',
-            ProteinName,
-            '. Output just the dictionary {{"information": "response", "recent_research": "response", "under_researched_areas": "response"}}. Do not include ```json" strings in output.')
-);
-"""
-
-# Execute the query to create the function
-spark.sql(create_function_query)
 
 # COMMAND ----------
 
@@ -555,62 +548,6 @@ else:
 # MAGIC - In order to more efficiently explore without waiting for the queries to run for specific `Organism_SimpleTerm` and `ProteinClassificationScore` during ad-hoc explorations, we will pre-process to extract the information pertaining to `recent research` and `"under_researched_areas" that hold promise for drug discovery` for the list of proteins in our `tinysample`. 
 # MAGIC - Although this will take a bit of time up-front, it will allow for more efficient and simpler filtering of the inferred proteins and the research-relevant outputs. 
 # MAGIC - For production use, [provisioned throughput model serving endpoint](https://docs.databricks.com/en/machine-learning/foundation-model-apis/deploy-prov-throughput-foundation-model-apis.html#provisioned-throughput-endpoint-ui) is highly recommended if [Foundation Model APIs](https://docs.databricks.com/aws/en/machine-learning/model-serving/model-serving-limits#provisioned-throughput-limits) can be leveraged!
-
-# COMMAND ----------
-
-# DBTITLE 1,[x] pyspark Bulk process with SQL_function
-# from pyspark.sql.functions import col, get_json_object, expr
-
-# # Define the base query
-# base_query = f"""
-# SELECT
-#   p.ProteinName,
-#   p.label AS ProteinType,
-#   p.score AS ProteinClassificationScore,
-#   p.GeneName,
-#   p.Sequence,
-#   p.Molecular_Weight,
-#   p.OrganismName,
-#   o.Organism_SimpleTerm
-# FROM
-#    {catalog_name}.{schema_name}.proteinclassification_tiny p
-#   JOIN  {catalog_name}.{schema_name}.tinysample_organism_info_scientificNsimple o 
-#   ON p.OrganismName = o.OrganismName
-# """
-
-# # Create a DataFrame from the base query
-# df_base = spark.sql(base_query)
-
-# # Apply the get_protein_research_info function and extract JSON fields
-# df_research_info = df_base.withColumn(
-#     "researchDict", 
-#     expr(f"{catalog_name}.{schema_name}.get_protein_research_info(ProteinName)").cast('string')
-# ).withColumn(
-#     "information", 
-#     get_json_object(col("researchDict"), "$.information")
-# ).withColumn(
-#     "recent_research", 
-#     get_json_object(col("researchDict"), "$.recent_research")
-# ).withColumn(
-#     "under_researched_areas", 
-#     get_json_object(col("researchDict"), "$.under_researched_areas")
-# ).select(
-#     "OrganismName",
-#     "Organism_SimpleTerm",
-#     "ProteinName",
-#     "researchDict",
-#     "information",
-#     "recent_research",
-#     "under_researched_areas",
-#     "ProteinType",
-#     "ProteinClassificationScore"
-# )
-
-
-# # df_base.count(), df_research_info.count()
-
-# # # Write the DataFrame to a Delta Table 
-# # df_research_info.write.mode("overwrite").option("mergeSchema", "true").saveAsTable(f"{catalog_name}.{schema_name}.tinysample_organism_protein_research_info")
 
 # COMMAND ----------
 
@@ -759,4 +696,5 @@ display(sDF_protein_research_info)
 
 # COMMAND ----------
 
-
+# MAGIC %md
+# MAGIC

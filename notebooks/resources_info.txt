@@ -1,34 +1,39 @@
-## AI/BI Dashboard:
-https://e2-demo-west.cloud.databricks.com/dashboardsv3/01efc7181c8a1509ae71b5e4af24b29c/published?o=2556758628403379
-
-
 ## UC: 
-demos_genie.hls_ai_drug_discovery
-https://e2-demo-west.cloud.databricks.com/explore/data/demos_genie/hls_ai_drug_discovery?o=2556758628403379
+<catalog_name>.ai_driven_drug_discovery
 
 
-## DLT Pipeline JSON
+## ELT Pipeline JSON
 {
-  "id": "f7cfd697-0adf-4719-85d0-26779034145b",
-  "pipeline_type": "WORKSPACE",
-  "name": "dlt_protein_preprocessing",
-  "libraries": [
-    {
-      "glob": {
-        "include": "/Workspace/Users/<user_email>/<foler_path>/0.1.0_DLT_ProteinData_processing" 
-      }
-    }
-  ],
-  "schema": "ai_driven_drug_discovery",
-  "continuous": false,
-  "development": true,
-  "photon": true,
-  "channel": "CURRENT",
-  "catalog": "mmt_demos2",
-  "serverless": true,
-  "root_path": "/Workspace/Users/<user_email>/<foler_path>/dlt_protein_preprocessing"
+    "id": "################################",
+    "pipeline_type": "WORKSPACE",
+    "development": true,
+    "event_log": {
+        "catalog": "<catalog_name>",
+        "schema": "ai_driven_drug_discovery",
+        "name": "proteindata_ETL"
+    },
+    "continuous": false,
+    "channel": "CURRENT",
+    "photon": true,
+    "libraries": [
+        {
+            "notebook": {
+                "path": "/Users/<user@email.com>/<path_to_repo>/ai-driven-drug-discovery/notebooks/0.2.0_ProteinData_ETL"
+            }
+        }
+    ],
+    "name": "proteindata_ETL",
+    "serverless": true,
+    "catalog": "<catalog_name>",
+    "tags": [
+        {
+            "key": "removeAfter",
+            "value": "2026-12-31"
+        }
+    ],
+    "schema": "ai_driven_drug_discovery",
+    "budget_policy_id": "################################"
 }
-
 
 ## compute JSON 
 "spec": {
@@ -39,9 +44,7 @@ https://e2-demo-west.cloud.databricks.com/explore/data/demos_genie/hls_ai_drug_d
         },
         "node_type_id": "g4dn.4xlarge",
         "custom_tags": {
-            "removeAfter": "2025-12-31"
+            "removeAfter": "2026-12-31"
         }
     }
-
-## LUCID CHART diagrams
-https://lucid.app/lucidchart/73e9b1d4-22b8-4068-8210-fc2634283f47/edit?viewport_loc=-743%2C-325%2C2736%2C1592%2CDkQHgbEYUJNF&invitationId=inv_f040b01f-6508-4cab-89db-25b218bb146c
+    

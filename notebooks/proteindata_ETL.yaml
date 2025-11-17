@@ -1,0 +1,19 @@
+resources:
+  pipelines:
+    pipeline_proteindata_etl:
+      name: proteindata_ETL
+      libraries:
+        - notebook:
+            path: /Users/<user@email.com>/<path_to_repo>/ai-driven-drug-discovery/notebooks/0.2.0_ProteinData_ETL
+      schema: ai_driven_drug_discovery
+      development: true
+      photon: true
+      catalog: "<catalog_name>"
+      serverless: true
+      budget_policy_id: "################################"
+      tags:
+        removeAfter: 2026-12-31
+      event_log:
+        name: proteindata_ETL
+        schema: ai_driven_drug_discovery
+        catalog: "<catalog_name>"
