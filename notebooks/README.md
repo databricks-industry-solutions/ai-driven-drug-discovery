@@ -1,4 +1,4 @@
-# Notebooks:
+# AI-Driven Drug Discovery Notebooks:
 
 This set of notebooks found within this repository folder involves data preparation and foundational model endpoint setup and usage.  
 
