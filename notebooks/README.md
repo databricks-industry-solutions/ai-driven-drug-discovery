@@ -37,7 +37,7 @@ ENDPOINT_NAME = "az_openai_gpt4o"         # TODO: Use Default OR Replace with <y
 
 ### Downstream: Setup up Dashboard
 
-Once these notebooks are run, we can configure the AIBI Dashboard with Genie using the associate template within [`./dashboards`](../dashboards/README.md)  folder.
+Once these notebooks are run, we can configure the AIBI Dashboard with Genie using the associate template within [`./dashboards`](../dashboards)  folder.
 
 <br>    
 
