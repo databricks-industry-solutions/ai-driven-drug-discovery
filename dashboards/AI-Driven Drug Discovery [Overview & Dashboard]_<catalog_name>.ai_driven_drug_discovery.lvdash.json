@@ -366,7 +366,7 @@
                 "\n",
                 "The following diagram illustrates the flow of processes involved and the [Databricks Intelligent Platform](https://www.databricks.com/resources/demos/tours/horizontal/introducing-databricks-intelligence-platform) features utilized (in red):   \n",
                 "\n",
-                "![](https://e2-demo-field-eng.cloud.databricks.com/ajax-api/2.0/fs/files//Volumes/<catalog_name>/ai_driven_drug_discovery/imgs/AI-Drug-Discovery-Page2o.png)\n",
+                "![Architecture Flow](https://<databricks-instance>/ajax-api/2.0/fs/files//Volumes/<catalog\\_name>/ai\\_driven\\_drug\\_discovery/imgs/AI-Drug-Discovery-Page2.png)\n",
                 "\n",
                 "--- \n",
                 "\n",

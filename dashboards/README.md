@@ -7,6 +7,8 @@ The dashboard template JSON file:
 
 - Please update all Unity Catalog **`{catalog}.{schema}.*table`** paths to match the ones being specified and used in the notebooks, e.g. users may have specified their **`<catalog_name>.<schema_name>`** etc. Default `Table` names would be used per notebook/dashboard template. 
 
+- Reivew and `run` the notebook [`code2embed_img_in_dashboard.ipynb`](code2embed_img_in_dashboard.ipynb) to copy over the relevant architecture flow image for embedding in dashboard, remembering to update the corresponding `markdown-url` in the dashboard template `JSON` as shown in the notebook.
+
 - For "ask Genie" within dashboard, please **Enable Genie** via the **`AIBI settings`** (see screenshot below; RHS panel). Alternatively you can create a separate Genie Space and link it to the dashboard.      
 
 - Additional [example questions](dashboards/GenieSpace_AdditionalExampleQs_GeneratedQueries.ipynb) are provided as guidance. 
