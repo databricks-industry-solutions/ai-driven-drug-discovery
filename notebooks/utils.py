@@ -8,43 +8,38 @@
 
 ## REPLACE THE VALUES BELOW WITH YOUR OWN BEFORE running the notebooks:
 
-CATALOG_NAME = "<your_catalog_name>"      # TODO: Replace with <your_catalog_name>
+CATALOG_NAME = "mmt_demos2"
+# CATALOG_NAME = "<your_catalog_name>"      # TODO: Replace with <your_catalog_name>
 SCHEMA_NAME = "ai_driven_drug_discovery"  # TODO: Use Default OR Replace with <your_schema_name>
 VOLUME_NAME = "protein_seq"               # TODO: Use Default OR Replace with <your_volume_name> for file storage
 ENDPOINT_NAME = "az_openai_gpt4o"         # TODO: Use Default OR Replace with <your_external_endpoint_name> e.g. AI Gateway endpoint name
 
-from pyspark.sql import SparkSession
-
 # COMMAND ----------
 
 # DBTITLE 1,set up  UC paths configs
-def setup_uc_paths(spark: SparkSession = None, 
-                     use_widgets: bool = True) -> dict:
+def setup_uc_paths(use_widgets: bool = True, print_endpoint: bool = False, silent: bool = True) -> dict:
     """
     Setup Unity Catalog resources and return configuration
     
     Args:
-        spark: SparkSession (optional - auto-detected if None)
         use_widgets: If True (default), creates widgets for configuration
+        print_endpoint: If True, includes external_endpoint_name in printed output (default: False)
+        silent: If True (default), suppresses all printed output
     
     Returns:
         Dictionary with catalog_name, schema_name, volume_name, external_endpoint_name, 
         volume_location, schema_path, volume_path
     
     Example:
-        config = setup_environment()
-        print(config['catalog_name'])
-        print(config['volume_location'])
+        # Silent mode (default - no output)
+        config = setup_uc_paths()
+        
+        # With output printed (no endpoint)
+        config = setup_uc_paths(silent=False)
+        
+        # With output and endpoint printed
+        config = setup_uc_paths(silent=False, print_endpoint=True)
     """
-    # Auto-detect spark session if not provided
-    if spark is None:
-        spark = SparkSession.getActiveSession()
-        if spark is None:
-            raise RuntimeError(
-                "No active Spark session found. "
-                "This should not happen in Databricks notebooks."
-            )
-    
     # Setup widgets if requested
     if use_widgets:
         try:
@@ -116,7 +111,7 @@ def setup_uc_paths(spark: SparkSession = None,
                 f"  - {', '.join(missing_configs)}"
             )
     
-    # Create UC resources if they don't exist
+    # Create UC resources if they don't exist (using global spark object)
     spark.sql(f"CREATE CATALOG IF NOT EXISTS {catalog_name}")
     spark.sql(f"CREATE SCHEMA IF NOT EXISTS {catalog_name}.{schema_name}")
     spark.sql(f"CREATE VOLUME IF NOT EXISTS {catalog_name}.{schema_name}.{volume_name}")
@@ -136,33 +131,44 @@ def setup_uc_paths(spark: SparkSession = None,
         'volume_path': volume_path
     } 
     
-    # Print summary
-    config_source = " (from widgets)" if use_widgets else " (from defaults)"
-    print("="*70)
-    print(f"UC Paths Configured{config_source}")
-    print("="*70)
-    for key, value in uc_config.items():
-        print(f"{key}: {value}")
-    print("="*70)
+    # Print summary with selective fields (unless silent mode)
+    if not silent:
+        config_source = " (from widgets)" if use_widgets else " (from defaults)"
+        print("="*70)
+        print(f"UC Paths Configured{config_source}")
+        print("="*70)
+        for key, value in uc_config.items():
+            # Skip external_endpoint_name if print_endpoint is False
+            if key == 'external_endpoint_name' and not print_endpoint:
+                continue
+            print(f"{key}: {value}")
+        print("="*70)
     
     return uc_config
 
 
-def remove_widgets() -> None:
+def remove_widgets(silent: bool = True) -> None:
     """
     Remove configuration widgets from notebook UI
+    
+    Args:
+        silent: If True (default), suppresses printed output
     """
     try:
         dbutils.widgets.removeAll()
-        print("Existing Widgets Removed")
+        if not silent:
+            print("Existing Widgets Removed")
     except:
-        print("No widgets to remove")
+        if not silent:
+            print("No widgets to remove")
 
 # COMMAND ----------
 
 # DBTITLE 1,test/ example usage
-# remove_widgets() 
-# setup_uc_paths(spark=None, use_widgets=False);
+# setup_uc_paths(use_widgets=False, print_endpoint=False, silent=True)
+
+# Test: With output printed (but no endpoint)
+# setup_uc_paths(use_widgets=False, print_endpoint=False, silent=False)
 
 # COMMAND ----------
 
