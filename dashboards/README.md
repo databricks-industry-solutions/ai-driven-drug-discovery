@@ -24,9 +24,9 @@ The dashboard template JSON file:
 ### What the 2-page Dashboard looks like:
 
 #### [Overview Tab] -- `print-extracted from editing view` 
-![overview](../assets/imgs/AI-Driven Drug Discovery [Overview].jpg) 
-<!-- /Workspace/Users/may.merkletan@databricks.com/REPOs/ai-driven-drug-discovery/assets/imgs/AI-Driven Drug Discovery [Overview].jpg -->
+![overview](../assets/imgs/AI-Driven%20Drug%20Discovery%20%5BOverview%5D.jpg)    
+<!-- usingg github filename instead  -->
    
 #### [Dashboard Tab] -- `downloaded as PDF from published view`
-![dashboard](../assets/imgs/AI-Driven Drug Discovery [Dashboard].jpg)
+![dashboard](../assets/imgs/AI-Driven%20Drug%20Discovery%20%5BDashboard%5D.jpg)
 
