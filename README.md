@@ -79,7 +79,7 @@ Please refer to [`README.md` within `./notebooks`](notebooks/README.md) section 
 
 - Please review [CONTRIBUTING.md](CONTRIBUTING.md) for more details and guidance prior to contributing.
 - **`git clone`** this project locally
-- If you are working assets that require CICD and trigger git actions or rely on Databricks Asset Bundles, utilize the [Databricks Asset Bundles (DABs) documentation](https://docs.databricks.com/aws/en/dev-tools/bundles/) and the [Databricks CLI](https://docs.databricks.com/aws/en/dev-tools/cli/) to test your changes against a Databricks workspace of your choice
+- If you are working on assets that require CICD and trigger git actions or rely on Databricks Asset Bundles, utilize the [Databricks Asset Bundles (DABs) documentation](https://docs.databricks.com/aws/en/dev-tools/bundles/) and the [Databricks CLI](https://docs.databricks.com/aws/en/dev-tools/cli/) to test your changes against a Databricks workspace of your choice
 - Contribute to repositories with pull requests (PRs), ensuring that you always have a second-party review from a capable teammate
 
 <!-- Please refer to [REPO_structure.md](REPO_structure.md) and [CONTRIBUTING.md](CONTRIBUTING.md) for more details and guidance.     -->
