@@ -99,7 +99,7 @@ Databricks support doesn't cover this content. For questions or bugs, please ope
 
 | Package | License | Copyright |
 |---------|---------|-----------|
-| [biopython](https://github.com/biopython/biopython) | [Biopython License Agreement (dual licensed with BSD 3-Clause)](https://github.com/biopython/biopython/blob/master/LICENSE.rst) | Copyright (c) 1999-2024, The Biopython Contributors |
+| [biopython](https://github.com/biopython/biopython) | [Biopython License Agreement (dual licensed with BSD 3-Clause)](https://github.com/biopython/biopython/blob/master/LICENSE.rst) | Copyright (c) 1999-2025, The Biopython Contributors |
 | [databricks-sdk](https://github.com/databricks/databricks-sdk-py) | [Apache License 2.0](https://github.com/databricks/databricks-sdk-py/blob/main/LICENSE) | Copyright 2023-present, Databricks, Inc. |
 | [pandas](https://github.com/pandas-dev/pandas) | [BSD 3-Clause License](https://github.com/pandas-dev/pandas/blob/main/LICENSE) | Copyright (c) 2008-2011, AQR Capital Management, LLC, Lambda Foundry, Inc. and PyData Development Team; Copyright (c) 2011-present, Open source contributors |
 | [pyspark](https://github.com/apache/spark) | [Apache License 2.0](https://github.com/apache/spark/blob/master/LICENSE) | Copyright 2014-present, The Apache Software Foundation |
