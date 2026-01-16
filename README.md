@@ -95,7 +95,7 @@ Databricks support doesn't cover this content. For questions or bugs, please ope
 
 ## Licenses
 
-&copy; 2025 Databricks, Inc. All rights reserved. The source in this project is provided subject to the Databricks License [https://databricks.com/db-license-source]. All included or referenced third party libraries are subject to the licenses set forth below.
+&copy; 2026 Databricks, Inc. All rights reserved. The source in this project is provided subject to the Databricks License [https://databricks.com/db-license-source]. All included or referenced third party libraries are subject to the licenses set forth below.
 
 | Package | License | Copyright |
 |---------|---------|-----------|
